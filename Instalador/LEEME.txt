@@ -1,19 +1,38 @@
-COMO GENERAR EL INSTALADOR
-==========================
-Requisitos en tu PC de desarrollo (cualquier Windows 10/11 de 64 bits):
-  - Visual Studio 2019/2022 (o .NET SDK) con soporte para .NET Framework 4.8
-  - Inno Setup 6 -> https://jrsoftware.org/isdl.php
-  - Instalador offline de .NET 4.8 (ndp48-x86-x64-allos-enu.exe) copiado en la carpeta "redist"
+COMPATIBILIDAD DE FOTOCABINA
+=============================
+El programa esta preparado para:
+  - Windows 7 Service Pack 1 (32 y 64 bits).
+  - Windows 10 (32 y 64 bits).
+  - Windows 11 (64 bits).
 
-1) Compilar el programa en Release:
-      dotnet build FotoCabina\FotoCabina.csproj -c Release
-   La salida queda en FotoCabina\bin\Release\net48\
-2) (Opcional) Poner marco.png (600x1800, fondo transparente) junto a FotoCabina.csproj.
-3) Abrir Instalador\FotoCabina.iss en Inno Setup y presionar Compilar (F9).
-   Resultado: Instalador\salida\Instalador_FotoCabina.exe
+IMPORTANTE PARA WINDOWS 7
+  - Debe ser Windows 7 Service Pack 1 (SP1). Windows 7 sin SP1 no es compatible.
+  - El instalador incluye .NET Framework 4.8 offline e intenta instalarlo si hace falta.
+  - Si .NET 4.8 no se instala, instala las actualizaciones pendientes de Windows 7,
+    reinicia el equipo y vuelve a ejecutar el instalador.
+  - Microsoft indica que .NET Framework 4.8 se puede instalar en Windows 7 SP1.
+  - Windows 7 ya no recibe soporte general de Microsoft; se recomienda usarlo
+    solamente en equipos que no manejen informacion sensible y mantenerlo aislado.
+
+REQUISITOS PARA GENERAR EL INSTALADOR
+  - Visual Studio 2019/2022 o .NET SDK con soporte para .NET Framework 4.8.
+  - Inno Setup 6: https://jrsoftware.org/isdl.php
+  - Instalador offline de .NET 4.8 (ndp48-x86-x64-allos-enu.exe) en Instalador\\redist.
+
+COMO GENERAR EL INSTALADOR
+  1) Compilar en Release:
+       dotnet build FotoCabina\\FotoCabina.csproj -c Release
+     La salida queda en FotoCabina\\bin\\Release\\net48\\
+  2) Opcional: colocar marco.png (600x1800, fondo transparente) junto a FotoCabina.csproj.
+  3) Abrir Instalador\\FotoCabina.iss en Inno Setup y compilar (F9).
+     Resultado: Instalador\\salida\\Instalador_FotoCabina.exe
 
 NOTAS
-  - Windows 7 debe tener Service Pack 1.
-  - Ajustes en FotoCabina.exe.config dentro de la carpeta de instalacion.
+  - La aplicacion AnyCPU se ejecuta como 32 bits en Windows de 32 bits y como 64 bits
+    en Windows de 64 bits. Esto permite que el proceso coincida con la arquitectura
+    del sistema y sus controladores DirectShow.
+  - La compatibilidad real de camaras e impresoras depende de que existan controladores
+    compatibles con la version y arquitectura de Windows instalada.
+  - Ajustes: FotoCabina.exe.config y configuracion guardada por el usuario.
   - Salir del programa: Ctrl + Q.
-  - Fotos guardadas en Imagenes\FotoCabina\<fecha_hora>\
+  - Fotos guardadas en Imagenes\\FotoCabina\\<fecha_hora>\\
