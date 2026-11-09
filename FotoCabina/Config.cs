@@ -6,9 +6,26 @@ namespace FotoCabina
 {
     static class Config
     {
-        static string S(string k, string d) { var v = ConfigurationManager.AppSettings[k]; return string.IsNullOrWhiteSpace(v) ? d : v.Trim(); }
+        static Configuration Usuario
+        {
+            get { return ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal); }
+        }
+        static string S(string k, string d)
+        {
+            try { var v = Usuario.AppSettings.Settings[k]; if (v != null && !string.IsNullOrWhiteSpace(v.Value)) return v.Value.Trim(); } catch { }
+            var original = ConfigurationManager.AppSettings[k];
+            return string.IsNullOrWhiteSpace(original) ? d : original.Trim();
+        }
         static int I(string k, int d) { int r; return int.TryParse(S(k, ""), out r) ? r : d; }
         static bool B(string k, bool d) { bool r; return bool.TryParse(S(k, ""), out r) ? r : d; }
+        public static void Guardar(string clave, string valor)
+        {
+            var cfg = Usuario;
+            if (cfg.AppSettings.Settings[clave] == null) cfg.AppSettings.Settings.Add(clave, valor);
+            else cfg.AppSettings.Settings[clave].Value = valor;
+            cfg.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
+        }
         public static string CarpetaApp { get { return AppDomain.CurrentDomain.BaseDirectory; } }
         public static int NumFotos { get { return Math.Max(1, Math.Min(4, I("NumFotos", 4))); } }
         public static int Cuenta { get { return Math.Max(1, I("Cuenta", 3)); } }
