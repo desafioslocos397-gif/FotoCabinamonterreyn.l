@@ -1,0 +1,36 @@
+name: Crear instalador
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compilar FotoCabina
+        run: dotnet build FotoCabina/FotoCabina.csproj -c Release
+
+      - name: Descargar .NET Framework 4.8 (instalador offline)
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path Instalador/redist | Out-Null
+          Invoke-WebRequest -Uri "https://go.microsoft.com/fwlink/?linkid=2088631" -OutFile "Instalador/redist/ndp48-x86-x64-allos-enu.exe"
+
+      - name: Instalar Inno Setup
+        shell: pwsh
+        run: |
+          if (-not (Test-Path "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe")) { choco install innosetup -y --no-progress }
+
+      - name: Crear instalador
+        shell: pwsh
+        run: '& "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" "Instalador\FotoCabina.iss"'
+
+      - name: Publicar instalador
+        uses: actions/upload-artifact@v4
+        with:
+          name: Instalador_FotoCabina
+          path: Instalador/salida/Instalador_FotoCabina.exe
