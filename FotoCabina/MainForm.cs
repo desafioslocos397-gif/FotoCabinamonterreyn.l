@@ -59,9 +59,23 @@ namespace FotoCabina
             EventHandler iniciarTocando = async (s, e) => { if (estado == Estado.Inicio) await Sesion(); };
             vista.Click += iniciarTocando;
             lblMensaje.Click += iniciarTocando;
-            KeyDown += (s, e) => { if (e.Control && e.KeyCode == Keys.Q) Close(); };
+            KeyDown += (s, e) => { if (e.Control && e.KeyCode == Keys.Q) Close(); else if (e.KeyCode == Keys.F1) { e.Handled = true; AbrirMenu(); } };
             Shown += (s, e) => IniciarCamara();
             FormClosing += (s, e) => DetenerCamara();
+        }
+
+        void AbrirMenu()
+        {
+            if (estado == Estado.Capturando) return;
+            int camaraAnterior = Config.Camara;
+            using (var menu = new MenuConfig())
+            {
+                if (menu.ShowDialog(this) == DialogResult.OK && Config.Camara != camaraAnterior)
+                {
+                    DetenerCamara();
+                    IniciarCamara();
+                }
+            }
         }
 
         Button Crear(string texto, Color color, EventHandler click)
