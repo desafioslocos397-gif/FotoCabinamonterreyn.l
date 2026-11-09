@@ -29,9 +29,6 @@ Name: "inicio"; Description: "Iniciar FotoCabina automaticamente al encender Win
 Source: "{#Origen}\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion
 Source: "redist\ndp48-x86-x64-allos-enu.exe"; DestDir: "{tmp}"; Flags: deleteafterinstall; Check: not Net48Instalado
 
-[Dirs]
-Name: "{userpictures}\FotoCabina"; Permissions: users-modify
-
 [Icons]
 Name: "{group}\FotoCabina"; Filename: "{app}\FotoCabina.exe"
 Name: "{autodesktop}\FotoCabina"; Filename: "{app}\FotoCabina.exe"; Tasks: escritorio
