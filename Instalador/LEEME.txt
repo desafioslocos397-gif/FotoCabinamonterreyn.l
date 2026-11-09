@@ -1,0 +1,19 @@
+COMO GENERAR EL INSTALADOR
+==========================
+Requisitos en tu PC de desarrollo (cualquier Windows 10/11 de 64 bits):
+  - Visual Studio 2019/2022 (o .NET SDK) con soporte para .NET Framework 4.8
+  - Inno Setup 6 -> https://jrsoftware.org/isdl.php
+  - Instalador offline de .NET 4.8 (ndp48-x86-x64-allos-enu.exe) copiado en la carpeta "redist"
+
+1) Compilar el programa en Release:
+      dotnet build FotoCabina\FotoCabina.csproj -c Release
+   La salida queda en FotoCabina\bin\Release\net48\
+2) (Opcional) Poner marco.png (600x1800, fondo transparente) junto a FotoCabina.csproj.
+3) Abrir Instalador\FotoCabina.iss en Inno Setup y presionar Compilar (F9).
+   Resultado: Instalador\salida\Instalador_FotoCabina.exe
+
+NOTAS
+  - Windows 7 debe tener Service Pack 1.
+  - Ajustes en FotoCabina.exe.config dentro de la carpeta de instalacion.
+  - Salir del programa: Ctrl + Q.
+  - Fotos guardadas en Imagenes\FotoCabina\<fecha_hora>\
