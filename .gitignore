@@ -1,0 +1,5 @@
+bin/
+obj/
+.vs/
+Instalador/salida/
+Instalador/redist/*.exe
