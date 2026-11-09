@@ -17,15 +17,15 @@ IMPORTANTE PARA WINDOWS 7
 REQUISITOS PARA GENERAR EL INSTALADOR
   - Visual Studio 2019/2022 o .NET SDK con soporte para .NET Framework 4.8.
   - Inno Setup 6: https://jrsoftware.org/isdl.php
-  - Instalador offline de .NET 4.8 (ndp48-x86-x64-allos-enu.exe) en Instalador\\redist.
+  - Instalador offline de .NET 4.8 (ndp48-x86-x64-allos-enu.exe) en Instalador\redist.
 
 COMO GENERAR EL INSTALADOR
   1) Compilar en Release:
-       dotnet build FotoCabina\\FotoCabina.csproj -c Release
-     La salida queda en FotoCabina\\bin\\Release\\net48\\
+       dotnet build FotoCabina\FotoCabina.csproj -c Release
+     La salida queda en FotoCabina\bin\Release\net48\
   2) Opcional: colocar marco.png (600x1800, fondo transparente) junto a FotoCabina.csproj.
-  3) Abrir Instalador\\FotoCabina.iss en Inno Setup y compilar (F9).
-     Resultado: Instalador\\salida\\Instalador_FotoCabina.exe
+  3) Abrir Instalador\FotoCabina.iss en Inno Setup y compilar (F9).
+     Resultado: Instalador\salida\Instalador_FotoCabina.exe
 
 NOTAS
   - La aplicacion AnyCPU se ejecuta como 32 bits en Windows de 32 bits y como 64 bits
@@ -35,4 +35,4 @@ NOTAS
     compatibles con la version y arquitectura de Windows instalada.
   - Ajustes: FotoCabina.exe.config y configuracion guardada por el usuario.
   - Salir del programa: Ctrl + Q.
-  - Fotos guardadas en Imagenes\\FotoCabina\\<fecha_hora>\\
+  - Fotos guardadas en Imagenes\FotoCabina\<fecha_hora>\
