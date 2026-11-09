@@ -1,0 +1,7 @@
+OBTENER EL .EXE SIN INSTALAR NADA (GitHub Actions)
+1. Crea cuenta gratis en https://github.com y un repositorio nuevo (privado esta bien).
+2. Sube TODO el contenido de esta carpeta al repositorio (incluida la carpeta oculta .github).
+   Con "Add file > Upload files" arrastra las carpetas FotoCabina, Instalador y .github.
+3. Ve a la pestana Actions > "Crear instalador" > Run workflow (tambien corre solo al subir).
+4. Espera 3-5 minutos. Entra a la ejecucion terminada y descarga "Instalador_FotoCabina"
+   (zip que contiene Instalador_FotoCabina.exe).
